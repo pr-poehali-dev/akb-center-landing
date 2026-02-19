@@ -6,7 +6,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 
 const LOGO_URL = "https://cdn.poehali.dev/projects/9f845550-d359-45fc-a974-91d986e67edd/bucket/5117bba6-7e54-434e-9dcd-9b6ef6d0cb8f.jpg";
-const BATTERY_IMG = "https://cdn.poehali.dev/projects/9f845550-d359-45fc-a974-91d986e67edd/files/6e450681-ff59-4536-9ad5-25992cc8b04e.jpg";
+const BATTERY_BG = "https://cdn.poehali.dev/projects/9f845550-d359-45fc-a974-91d986e67edd/files/220f914f-cca5-4f2f-a6cb-707692cb4029.jpg";
+const BATTERY_IMG_1 = "https://cdn.poehali.dev/projects/9f845550-d359-45fc-a974-91d986e67edd/files/f37dd9fb-89c1-4222-8fb2-d1e0f2db6ac2.jpg";
+const BATTERY_IMG_2 = "https://cdn.poehali.dev/projects/9f845550-d359-45fc-a974-91d986e67edd/files/092d9452-7731-4adb-8e27-0a589c0ca5d4.jpg";
+const BATTERY_IMG_OLD = "https://cdn.poehali.dev/projects/9f845550-d359-45fc-a974-91d986e67edd/files/6e450681-ff59-4536-9ad5-25992cc8b04e.jpg";
 
 const PHONE_MAIN = "88005555221";
 const PHONE_MAIN_DISPLAY = "8 (800) 555-52-21";
@@ -22,6 +25,8 @@ const BRANDS = ["Все", "Toyota", "Hyundai", "Kia", "Volkswagen", "BMW", "Merc
 const TYPES = ["Все", "Кальциевые", "AGM", "EFB", "Гелевые", "Щелочные"];
 const CAPACITIES = ["Все", "45 Ач", "55 Ач", "60 Ач", "70 Ач", "75 Ач", "90 Ач", "100 Ач"];
 
+const PRODUCT_IMAGES = [BATTERY_IMG_1, BATTERY_IMG_2, BATTERY_IMG_OLD];
+
 interface Product {
   id: number;
   name: string;
@@ -32,21 +37,22 @@ interface Product {
   oldPrice?: number;
   warranty: string;
   inStock: boolean;
+  img: number;
 }
 
 const PRODUCTS: Product[] = [
-  { id: 1, name: "VARTA Blue Dynamic D24", capacity: "60 Ач", type: "Кальциевые", brand: ["Volkswagen", "BMW", "Mercedes"], price: 7200, oldPrice: 8500, warranty: "2 года", inStock: true },
-  { id: 2, name: "BOSCH S4 005", capacity: "60 Ач", type: "Кальциевые", brand: ["Toyota", "Hyundai", "Kia"], price: 6800, warranty: "2 года", inStock: true },
-  { id: 3, name: "EXIDE Excell EB602", capacity: "60 Ач", type: "Кальциевые", brand: ["Renault", "Lada"], price: 5400, oldPrice: 6200, warranty: "2 года", inStock: true },
-  { id: 4, name: "VARTA Silver Dynamic AGM", capacity: "70 Ач", type: "AGM", brand: ["BMW", "Mercedes"], price: 14500, warranty: "3 года", inStock: true },
-  { id: 5, name: "BOSCH S5 A08 AGM", capacity: "70 Ач", type: "AGM", brand: ["Volkswagen", "BMW"], price: 13200, oldPrice: 15000, warranty: "3 года", inStock: true },
-  { id: 6, name: "AKOM EFB 75", capacity: "75 Ач", type: "EFB", brand: ["Lada", "Renault", "Hyundai"], price: 7800, warranty: "3 года", inStock: true },
-  { id: 7, name: "Тюмень Premium 55", capacity: "55 Ач", type: "Кальциевые", brand: ["Lada", "Kia", "Renault"], price: 4200, warranty: "2 года", inStock: true },
-  { id: 8, name: "MUTLU SFB 100", capacity: "100 Ач", type: "Кальциевые", brand: ["Toyota", "BMW", "Mercedes"], price: 9800, oldPrice: 11200, warranty: "2 года", inStock: true },
-  { id: 9, name: "VARTA Start-Stop EFB", capacity: "70 Ач", type: "EFB", brand: ["Volkswagen", "Hyundai", "Kia"], price: 10500, warranty: "3 года", inStock: true },
-  { id: 10, name: "BOSCH S4 029", capacity: "90 Ач", type: "Кальциевые", brand: ["Toyota", "Mercedes", "BMW"], price: 9200, warranty: "2 года", inStock: true },
-  { id: 11, name: "TITAN Arctic 55", capacity: "55 Ач", type: "Кальциевые", brand: ["Lada", "Renault", "Kia"], price: 4800, oldPrice: 5500, warranty: "2 года", inStock: true },
-  { id: 12, name: "OPTIMA Yellow Top 75", capacity: "75 Ач", type: "Гелевые", brand: ["Toyota", "BMW", "Mercedes"], price: 19500, warranty: "4 года", inStock: true },
+  { id: 1, name: "VARTA Blue Dynamic D24", capacity: "60 Ач", type: "Кальциевые", brand: ["Volkswagen", "BMW", "Mercedes"], price: 7200, oldPrice: 8500, warranty: "2 года", inStock: true, img: 0 },
+  { id: 2, name: "BOSCH S4 005", capacity: "60 Ач", type: "Кальциевые", brand: ["Toyota", "Hyundai", "Kia"], price: 6800, warranty: "2 года", inStock: true, img: 1 },
+  { id: 3, name: "EXIDE Excell EB602", capacity: "60 Ач", type: "Кальциевые", brand: ["Renault", "Lada"], price: 5400, oldPrice: 6200, warranty: "2 года", inStock: true, img: 2 },
+  { id: 4, name: "VARTA Silver Dynamic AGM", capacity: "70 Ач", type: "AGM", brand: ["BMW", "Mercedes"], price: 14500, warranty: "2 года", inStock: true, img: 0 },
+  { id: 5, name: "BOSCH S5 A08 AGM", capacity: "70 Ач", type: "AGM", brand: ["Volkswagen", "BMW"], price: 13200, oldPrice: 15000, warranty: "2 года", inStock: true, img: 1 },
+  { id: 6, name: "AKOM EFB 75", capacity: "75 Ач", type: "EFB", brand: ["Lada", "Renault", "Hyundai"], price: 7800, warranty: "2 года", inStock: true, img: 2 },
+  { id: 7, name: "Тюмень Premium 55", capacity: "55 Ач", type: "Кальциевые", brand: ["Lada", "Kia", "Renault"], price: 4200, warranty: "2 года", inStock: true, img: 0 },
+  { id: 8, name: "MUTLU SFB 100", capacity: "100 Ач", type: "Кальциевые", brand: ["Toyota", "BMW", "Mercedes"], price: 9800, oldPrice: 11200, warranty: "2 года", inStock: true, img: 1 },
+  { id: 9, name: "VARTA Start-Stop EFB", capacity: "70 Ач", type: "EFB", brand: ["Volkswagen", "Hyundai", "Kia"], price: 10500, warranty: "2 года", inStock: true, img: 0 },
+  { id: 10, name: "BOSCH S4 029", capacity: "90 Ач", type: "Кальциевые", brand: ["Toyota", "Mercedes", "BMW"], price: 9200, warranty: "2 года", inStock: true, img: 1 },
+  { id: 11, name: "TITAN Arctic 55", capacity: "55 Ач", type: "Кальциевые", brand: ["Lada", "Renault", "Kia"], price: 4800, oldPrice: 5500, warranty: "2 года", inStock: true, img: 2 },
+  { id: 12, name: "OPTIMA Yellow Top 75", capacity: "75 Ач", type: "Гелевые", brand: ["Toyota", "BMW", "Mercedes"], price: 19500, warranty: "2 года", inStock: true, img: 2 },
 ];
 
 const REVIEWS = [
@@ -62,9 +68,9 @@ function Header() {
   return (
     <header className="bg-brand-dark sticky top-0 z-50 shadow-lg">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <a href="#hero" className="flex items-center gap-3">
-          <img src={LOGO_URL} alt="АКБ центр" className="h-10 w-auto" />
-          <span className="font-heading font-bold text-xl">
+        <a href="#hero" className="flex items-center gap-4">
+          <img src={LOGO_URL} alt="АКБ центр" className="h-14 w-auto rounded-lg" style={{ background: 'transparent' }} />
+          <span className="font-heading font-extrabold text-2xl md:text-3xl tracking-tight">
             <span className="text-brand-yellow">АКБ</span>{" "}
             <span className="text-brand-red">центр</span>
           </span>
@@ -119,10 +125,10 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="hero" className="bg-brand-dark relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-yellow rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-brand-red rounded-full blur-[100px]" />
+    <section id="hero" className="relative overflow-hidden min-h-[520px]">
+      <div className="absolute inset-0">
+        <img src={BATTERY_BG} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-brand-dark/80" />
       </div>
 
       <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
@@ -136,8 +142,8 @@ function Hero() {
               <span className="text-brand-yellow">аккумуляторы</span>{" "}
               в Краснодаре
             </h1>
-            <p className="text-gray-400 text-lg mb-8 max-w-lg">
-              Широкий ассортимент АКБ от ведущих производителей. Бесплатная доставка по городу, гарантия до 4 лет, профессиональная консультация.
+            <p className="text-gray-300 text-lg mb-8 max-w-lg">
+              Широкий ассортимент АКБ от ведущих производителей. Бесплатная доставка по городу, гарантия до 2 лет, профессиональная консультация.
             </p>
             <div className="flex flex-wrap gap-4">
               <a href="#catalog">
@@ -158,11 +164,11 @@ function Hero() {
               {[
                 ["500+", "товаров в наличии"],
                 ["4", "магазина в городе"],
-                ["до 4 лет", "гарантия"],
+                ["до 2 лет", "гарантия"],
               ].map(([val, label]) => (
                 <div key={label}>
                   <p className="font-heading font-bold text-2xl text-brand-yellow">{val}</p>
-                  <p className="text-gray-500 text-sm">{label}</p>
+                  <p className="text-gray-400 text-sm">{label}</p>
                 </div>
               ))}
             </div>
@@ -171,7 +177,7 @@ function Hero() {
           <div className="hidden md:flex justify-center animate-slide-up">
             <div className="relative">
               <div className="absolute -inset-4 bg-brand-yellow/10 rounded-3xl blur-2xl" />
-              <img src={BATTERY_IMG} alt="Автомобильный аккумулятор" className="relative w-80 h-80 object-contain drop-shadow-2xl" />
+              <img src={BATTERY_IMG_1} alt="Автомобильный аккумулятор" className="relative w-80 h-80 object-contain drop-shadow-2xl" />
             </div>
           </div>
         </div>
@@ -182,14 +188,14 @@ function Hero() {
 
 function Advantages() {
   const items = [
-    { icon: "Shield", title: "Гарантия до 4 лет", desc: "Официальная гарантия от производителя на все аккумуляторы" },
+    { icon: "Shield", title: "Гарантия до 2 лет", desc: "Официальная гарантия от производителя на все аккумуляторы" },
     { icon: "Truck", title: "Бесплатная доставка", desc: "Доставим по Краснодару в день заказа абсолютно бесплатно" },
     { icon: "BadgeCheck", title: "Только оригинал", desc: "Работаем напрямую с производителями, без подделок" },
     { icon: "Wrench", title: "Установка на месте", desc: "Бесплатно установим аккумулятор при доставке" },
   ];
 
   return (
-    <section className="bg-brand-light py-12">
+    <section className="bg-[#FFF8EE] py-12">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {items.map((item) => (
@@ -225,7 +231,7 @@ function Catalog() {
   };
 
   return (
-    <section id="catalog" className="py-16 bg-white">
+    <section id="catalog" className="py-16 bg-[#FFFAF3]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="font-heading font-bold text-3xl md:text-4xl mb-3">
@@ -268,7 +274,7 @@ function Catalog() {
         </div>
 
         {cart.length > 0 && (
-          <div className="mb-6 p-4 bg-brand-yellow/10 border border-brand-yellow/30 rounded-2xl flex items-center justify-between">
+          <div className="mb-6 p-4 bg-brand-yellow/10 border border-brand-yellow/30 rounded-2xl flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <Icon name="ShoppingCart" size={20} className="text-brand-dark" />
               <span className="font-semibold text-brand-dark">В корзине: {cart.length} шт.</span>
@@ -288,8 +294,8 @@ function Catalog() {
           {filtered.map((product) => (
             <div key={product.id} className="bg-white border border-gray-100 rounded-2xl p-5 hover:shadow-xl hover:shadow-yellow-500/5 transition-all duration-300 hover-scale group">
               <div className="relative mb-4">
-                <div className="bg-brand-light rounded-xl p-6 flex items-center justify-center h-40">
-                  <img src={BATTERY_IMG} alt={product.name} className="h-28 object-contain group-hover:scale-105 transition-transform" />
+                <div className="bg-[#FFF8EE] rounded-xl p-4 flex items-center justify-center h-44 overflow-hidden">
+                  <img src={PRODUCT_IMAGES[product.img]} alt={product.name} className="h-36 object-contain group-hover:scale-105 transition-transform" />
                 </div>
                 {product.oldPrice && (
                   <Badge className="absolute top-2 right-2 bg-brand-red text-white text-xs font-bold">
@@ -349,7 +355,7 @@ function Catalog() {
 
 function Delivery() {
   return (
-    <section id="delivery" className="py-16 bg-brand-light">
+    <section id="delivery" className="py-16 bg-[#FFF8EE]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="font-heading font-bold text-3xl md:text-4xl mb-3">
@@ -405,7 +411,7 @@ function Delivery() {
 
 function Reviews() {
   return (
-    <section id="reviews" className="py-16 bg-white">
+    <section id="reviews" className="py-16 bg-[#FFFAF3]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="font-heading font-bold text-3xl md:text-4xl mb-3">
@@ -416,7 +422,7 @@ function Reviews() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
           {REVIEWS.map((review, idx) => (
-            <div key={idx} className="bg-brand-light rounded-2xl p-6 hover-scale">
+            <div key={idx} className="bg-white rounded-2xl p-6 hover-scale shadow-sm">
               <div className="flex items-center gap-1 mb-3">
                 {Array.from({ length: review.rating }).map((_, i) => (
                   <Icon key={i} name="Star" size={16} className="text-brand-yellow fill-brand-yellow" />
@@ -455,8 +461,13 @@ function Contacts() {
   };
 
   return (
-    <section id="contacts" className="py-16 bg-brand-dark">
-      <div className="container mx-auto px-4">
+    <section id="contacts" className="py-16 relative overflow-hidden">
+      <div className="absolute inset-0">
+        <img src={BATTERY_BG} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-brand-dark/85" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-10">
           <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-3">
             Наши <span className="text-brand-yellow">магазины</span>
@@ -467,7 +478,7 @@ function Contacts() {
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-12">
           <div className="space-y-4">
             {STORES.map((store, idx) => (
-              <div key={idx} className="bg-brand-blue rounded-2xl p-5 flex items-start gap-4">
+              <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 flex items-start gap-4 border border-white/5">
                 <div className="w-10 h-10 bg-brand-yellow rounded-xl flex items-center justify-center flex-shrink-0">
                   <Icon name="MapPin" size={20} className="text-brand-dark" />
                 </div>
@@ -481,7 +492,7 @@ function Contacts() {
               </div>
             ))}
 
-            <div className="bg-brand-blue rounded-2xl p-5 flex items-start gap-4">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-5 flex items-start gap-4 border border-white/5">
               <div className="w-10 h-10 bg-brand-red rounded-xl flex items-center justify-center flex-shrink-0">
                 <Icon name="PhoneCall" size={20} className="text-white" />
               </div>
@@ -495,7 +506,7 @@ function Contacts() {
             </div>
           </div>
 
-          <div className="bg-brand-blue rounded-2xl p-6 md:p-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/5">
             <h3 className="font-heading font-bold text-xl text-white mb-2">Обратная связь</h3>
             <p className="text-gray-400 text-sm mb-6">Оставьте заявку и мы перезвоним в течение 15 минут</p>
 
@@ -514,7 +525,7 @@ function Contacts() {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
-                  className="bg-brand-dark border-white/10 text-white placeholder:text-gray-500 rounded-xl py-5"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl py-5"
                 />
                 <Input
                   placeholder="Телефон"
@@ -522,13 +533,13 @@ function Contacts() {
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   required
-                  className="bg-brand-dark border-white/10 text-white placeholder:text-gray-500 rounded-xl py-5"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl py-5"
                 />
                 <Textarea
                   placeholder="Сообщение или вопрос"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="bg-brand-dark border-white/10 text-white placeholder:text-gray-500 rounded-xl min-h-[80px]"
+                  className="bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl min-h-[80px]"
                 />
                 <Button type="submit" className="w-full bg-brand-yellow text-brand-dark hover:bg-yellow-400 font-heading font-bold py-6 rounded-xl text-base">
                   <Icon name="Send" size={18} />
@@ -548,9 +559,9 @@ function Footer() {
     <footer className="bg-brand-dark border-t border-white/5 py-8">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img src={LOGO_URL} alt="АКБ центр" className="h-8 w-auto" />
-            <span className="font-heading font-bold text-lg">
+          <div className="flex items-center gap-4">
+            <img src={LOGO_URL} alt="АКБ центр" className="h-10 w-auto rounded-md" />
+            <span className="font-heading font-extrabold text-xl">
               <span className="text-brand-yellow">АКБ</span>{" "}
               <span className="text-brand-red">центр</span>
             </span>
@@ -567,7 +578,7 @@ function Footer() {
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#FFFAF3]">
       <Header />
       <Hero />
       <Advantages />
